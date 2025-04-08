@@ -41,10 +41,10 @@ void test_un_entier(int i) {
 }
 
 
-void test_entiers() {
+void test_entiers(void) {
     int i;
     afficher_titre("Test entiers");
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
 
     for (i=-5 ; i<= 5; i++) {
 	test_un_entier(i);
@@ -75,9 +75,9 @@ void test_une_chaine(char * c) {
     ok_test(b);
 }
 
-void test_chaines() {
+void test_chaines(void) {
     afficher_titre("Test Chaînes");
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     test_une_chaine("Bonjour");
     test_une_chaine("");
     test_une_chaine("Youpi !");
@@ -107,10 +107,10 @@ void test_un_symbole(char *c) {
     ok_test(b);
 }
 
-void test_symboles() {
+void test_symboles(void) {
     int b=1;
     afficher_titre("Test Symboles");
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     test_un_symbole("defun");
     test_un_symbole("while");
     test_un_symbole("+");
@@ -137,7 +137,7 @@ void test_une_liste_entier(int tab[], int taille) {
     sexpr e = NULL;
     int i;
     int b = 1;
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     printf("[");
     for (i=0; i<taille; i++) {
 	printf("%d", tab[i]);
@@ -158,7 +158,7 @@ void test_une_liste_symbole(char* tab[], int taille) {
     sexpr e = NULL;
     int i;
     int b = 1;
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     printf("[");
     for (i=0; i<taille; i++) {
 	printf("%s", tab[i]);
@@ -177,11 +177,11 @@ void test_une_liste_symbole(char* tab[], int taille) {
 }
 
 
-void test_cons() {
+void test_cons(void) {
     int b = 1;
     sexpr e;
     afficher_titre("Test cons");
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     e = cons(new_integer(3), new_string("trois"));
     b = RUN_TEST(!list_p(e))                             && b;
     b = RUN_TEST(cons_p(e))                              && b;
@@ -201,13 +201,13 @@ void test_cons() {
     ok_test(b);
 }
 
-void test_affichage_liste_cons() {
+void test_affichage_liste_cons(void) {
     sexpr a;
     sexpr b;
     sexpr c;
     sexpr d;
     afficher_titre("Test affichage listes et cons");
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     a = cons(new_integer(1), new_integer(2));
     b = cons(new_integer(1), cons(new_integer(2), NULL));
     c = cons(new_integer(1), cons(new_integer(2), cons(new_integer(3),NULL)));
@@ -221,7 +221,7 @@ void test_affichage_liste_cons() {
     printf("(1 2 3 . 4) : "); afficher(d) ; printf("\n");
 }
 
-void test_listes() {
+void test_listes(void) {
     int tab1[] = {11, 22, 33};
     char* tab2[] = {"defun", "x", "kikoo"};
     afficher_titre("Test Listes");
@@ -243,12 +243,12 @@ void test_listes() {
 /*                                  */
 /************************************/
 
-void test_types() {
-    test_entiers();
-    test_chaines();
-    test_symboles();
-    test_listes();
-    test_cons();
-    test_affichage_liste_cons();
+void test_types(void) {
+    test_entiers(void);
+    test_chaines(void);
+    test_symboles(void);
+    test_listes(void);
+    test_cons(void);
+    test_affichage_liste_cons(void);
 }
 #endif

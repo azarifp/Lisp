@@ -72,7 +72,7 @@ int comparer_memoire_pour_test(int tailles[], int libres[], int n) {
 /****************************/
 
 
-void test_memoire_vide() {
+void test_memoire_vide(void) {
     int b = 1;
     afficher_titre("Test : mémoire vide");
     initialiser_memoire_dynamique();
@@ -107,7 +107,7 @@ void test_memoire_vide() {
 /************************/
 
 
-void test_cons_bloc() {
+void test_cons_bloc(void) {
     int b = 1;
     printf("cons_bloc     ");
     b = RUN_TEST(cons_bloc(0,   0, 0, 123) == 123)        && b;
@@ -124,7 +124,7 @@ int test_un_bloc_suivant(int indice, bloc valeurs) {
     return bloc_suivant(indice);
 }
 
-void test_bloc_suivant() {
+void test_bloc_suivant(void) {
     int b = 1;
     printf("bloc_suivant  ");
     b = RUN_TEST(test_un_bloc_suivant(1, 123)         == 123) && b;
@@ -141,7 +141,7 @@ int test_un_bloc_precedant(int indice, bloc valeurs) {
     return bloc_precedant(indice);
 }
 
-void test_bloc_precedant() {
+void test_bloc_precedant(void) {
     int b = 1;
     printf("bloc_precedant");
     b = RUN_TEST(test_un_bloc_precedant(1, 123)         == 0)   && b;
@@ -158,7 +158,7 @@ int test_un_usage_bloc(int indice, bloc valeurs) {
     return usage_bloc(indice);
 }
 
-void test_usage_bloc() {
+void test_usage_bloc(void) {
     int b = 1;
     printf("usage_bloc    ");
     b = RUN_TEST(test_un_usage_bloc(1, 123)         == 0)   && b;
@@ -175,7 +175,7 @@ int test_un_rm_bloc(int indice, bloc valeurs) {
     return rm_bloc(indice);
 }
 
-void test_rm_bloc() {
+void test_rm_bloc(void) {
     int b = 1;
     printf("rm_bloc       ");
     b = RUN_TEST(test_un_rm_bloc(1, 123)         == 0)   && b;
@@ -189,7 +189,7 @@ void test_rm_bloc() {
 
 
 
-void test_taille_bloc() {
+void test_taille_bloc(void) {
     int b = 1;
     int n  = 6;
     int tailles[6] = {1, 5, 1, 8, 1, 5};
@@ -211,7 +211,7 @@ void test_taille_bloc() {
 }
 
 
-void test_allocateurs_fonctions_de_base() {
+void test_allocateurs_fonctions_de_base(void) {
     afficher_titre("Test allocateurs fonctions de bases");
     test_cons_bloc();
     test_bloc_suivant();
@@ -233,7 +233,7 @@ void test_allocateurs_fonctions_de_base() {
 /************/
 
 
-void test_dix_allocations() {
+void test_dix_allocations(void) {
     int b = 1;
     printf("Premier test :");
     initialiser_memoire_dynamique();
@@ -289,7 +289,7 @@ void test_dix_allocations() {
 
 
 
-void test_allocation_memoire_predefinie() {
+void test_allocation_memoire_predefinie(void) {
 
     int b = 1;
 
@@ -360,7 +360,7 @@ void test_allocation_memoire_predefinie() {
  */
 
 
-void test_allocateur_malloc() {
+void test_allocateur_malloc(void) {
     afficher_titre("Test Malloc ");
     test_dix_allocations();
     printf("\n");
@@ -379,7 +379,7 @@ void test_allocateur_malloc() {
 /*                                  */
 /************************************/
 
-void test_allocateur() {
+void test_allocateur(void) {
     test_memoire_vide();
     test_allocateurs_fonctions_de_base();
     test_allocateur_malloc();

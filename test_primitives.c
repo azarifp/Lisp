@@ -14,14 +14,14 @@
 /****************/
 
 #ifdef TEST_PRIMITIVES_ADD
-void test_add() {
+void test_add(void) {
     sexpr a;
     sexpr b;
     sexpr c;
     sexpr liste;
     sexpr env;
     afficher_titre("Test Additions");
-    initialiser_memoire_dynamique();
+    initialiser_memoire_dynamique(void);
     a = new_integer(10);
     b = new_integer(5);
     liste = cons(a, cons(b, NULL));

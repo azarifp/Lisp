@@ -1,29 +1,25 @@
 #include <stdio.h>
-#include "allocateur.h"
-#include "erreur.h"
-#include "string.h"
 #include "tests.h"
-#include "primitives.h"
 #include "mes_tests.h"
 
 
-int main() {
+int main(void) {
 
 
     /* Pour tester les fonctions de la première séance */
     test_memoire_vide();
     test_allocateurs_fonctions_de_base();
-    /* test_allocateur_malloc(); */
+    /* test_allocateur_malloc(void); */
 
 
     /* Pour tester les fonctions de la seconde séance */
-    /* test_entiers(); */
-    /* test_chaines(); */
-    /* test_symboles(); */
-    /* test_listes(); */
-    /* test_cons(); */
-    /* test_affichage_liste_cons(); */
-    /* test_add(); */
+    /* test_entiers(void); */
+    /* test_chaines(void); */
+    /* test_symboles(void); */
+    /* test_listes(void); */
+    /* test_cons(void); */
+    /* test_affichage_liste_cons(void); */
+    /* test_add(void); */
 
 
     /* Pour tester */

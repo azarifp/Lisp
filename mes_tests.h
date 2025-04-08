@@ -19,26 +19,23 @@
 /****************************************/
 
 
-/*
+/************************************/
 #define TEST_ALLOCATEUR_EX1
-void test_memoire_vide();
-*/
+void test_memoire_vide(void);
 
-/*
+
 #define TEST_ALLOCATEUR_EX2
-void test_allocateurs_fonctions_de_base();
-*/
+void test_allocateurs_fonctions_de_base(void);
 
-/*
 #define TEST_ALLOCATEUR_EX3
-void test_allocateur_malloc();
-*/
+void test_allocateur_malloc(void);
+
 
 /* Pour lancer les trois tests précédents */
-/*
+
 #define TEST_ALLOCATEUR
-void test_allocateur();
-*/
+void test_allocateur(void);
+
 
 
 /************************************/
@@ -49,30 +46,30 @@ void test_allocateur();
 
 /*
 #define TEST_TYPES_ENTIER
-void test_entiers();
+void test_entiers(void);
 */
 
 /*
 #define TEST_TYPES_CHAINE
-void test_chaines();
+void test_chaines(void);
 */
 
 /*
 #define TEST_TYPES_SYMBOLE
-void test_symboles();
+void test_symboles(void);
 */
 
 /*
 #define TEST_TYPES_LISTE
-void test_cons();
-void test_listes();
-void test_affichage_liste_cons();
+void test_cons(void);
+void test_listes(void);
+void test_affichage_liste_cons(void);
 */
 
 /* Tous les tests précédents sur les types en une fonction*/
 /*
 #define TEST_TYPES
-void test_types();
+void test_types(void);
 */
 
 
@@ -86,5 +83,5 @@ void test_types();
 
 /*
 #define TEST_PRIMITIVES_ADD
-void test_add();
+void test_add(void);
 */
