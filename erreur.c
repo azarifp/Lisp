@@ -19,4 +19,5 @@ void erreur_fatale(char  *fichier, int ligne, char* causes) {
     fprintf(stderr,"%s", couleur_defaut);
     fprintf(stderr,"   %s ligne %d\n\n", fichier, ligne);
     fprintf(stderr,"%s\n", causes);
+    exit(1);
 }

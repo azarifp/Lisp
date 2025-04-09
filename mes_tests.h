@@ -44,10 +44,10 @@ void test_allocateur(void);
 /*                                  */
 /************************************/
 
-/*
+
 #define TEST_TYPES_ENTIER
 void test_entiers(void);
-*/
+
 
 /*
 #define TEST_TYPES_CHAINE

@@ -1,6 +1,7 @@
 /* Include the header for using it for writing my code on 32bits */
 #include <stdint.h>
 #include <stdio.h>
+#include "allocateur.h"
 
 /* I declare a variable called bloc for  Unsigned 32-bit integer */
 typedef uint32_t bloc;
@@ -23,24 +24,20 @@ void initialiser_memoire_dynamique(void) {
 
 
 bloc cons_bloc(int rm, int precedant, int libre, int suivant) {
-	bloc cons_bloc = 0 ;
-	int masque = (1 << 16) - 1 ;
-	cons_bloc |= ( rm & 1 ) << 31 ;
-	cons_bloc |= (precedant & masque ) << 30 ;
-	cons_bloc |= (libre & 1) << 15 ;
-	cons_bloc |= (suivant & masque) ;
-	return cons_bloc ;
+
+	return (rm << 31) | (precedant << 16) | (libre << 15) | suivant ;
 }
 
+bloc masque = (1 << 15) - 1 ;
 
 int bloc_suivant(int i) {
-    return (MEMOIRE_DYNAMIQUE[i] >> 30) & 1;
+	return (MEMOIRE_DYNAMIQUE[i]) & masque;
 }
 
 
 
 int bloc_precedant(int i) {
-	return MEMOIRE_DYNAMIQUE[i] & ((1<<30) - 1) ;
+	return (MEMOIRE_DYNAMIQUE[i]>>16) & masque ;
 }
 
 int usage_bloc(int i){
@@ -54,27 +51,65 @@ int rm_bloc(int i) {
 
 
 int taille_bloc(int i) {
-	int suivant = bloc_suivant( i ) ;
-	int taille ;
-	if (usage_bloc(i)) {
-		taille = 0 ;
-	}
-	else if (rm_bloc(i)) {
-		taille = 0 ;
-	}
-	else if (i == TAILLE_MEMOIRE_DYNAMIQUE - 1) {
-		taille = 0 ;
-	}
-	else if (i == 0) {
-		taille = 0 ;
-	}
-	else
-	{
-		taille = suivant - i - 1 ; 
-	}
+	int suivant = bloc_suivant(i) ;
+    if (i == suivant) {
+        return 0 ;
+    }
+    else {
+        return suivant - i - 1 ;
+    }
 
- 	return taille ;	
 }
+int octets_vers_case(size_t size) {
+    if ( size % sizeof(bloc) == 0) {
+        return size/ sizeof(bloc) ;
+    }
+    else {
+    return ( size/sizeof(bloc) ) + 1 ;
+    }
+}
+
+int rechercher_bloc_libre(size_t size) {
+    
+    int i;
+    for( i = 0 ; i != bloc_suivant(i) ; i = bloc_suivant(i) ) {
+        
+        if (taille_bloc(i) >= size && (!usage_bloc(i))) return i ;
+
+    }
+    return -1;
+}
+void *allocateur_malloc(size_t size) {
+    int p,i,n,j,s;
+    int taille_dispo;
+    size = octets_vers_case(size) ;
+    i = rechercher_bloc_libre(size) ;
+    taille_dispo = taille_bloc(i) ;
+    
+   
+
+    if (i == -1) return NULL ;
+
+    if(taille_dispo > size) {
+        p = bloc_precedant(i) ;
+        j = bloc_suivant(i) ;
+        s = bloc_suivant(j) ;
+        n = i + size + 1 ;
+
+
+        MEMOIRE_DYNAMIQUE[i] = cons_bloc(0,p,1,n) ;
+        MEMOIRE_DYNAMIQUE[n] = cons_bloc(0,i,0,j) ;
+        MEMOIRE_DYNAMIQUE[j] = cons_bloc(0,n,1,s) ;
+    }
+        else {
+            p = bloc_precedant(i) ;
+            j = bloc_suivant(i) ;
+            MEMOIRE_DYNAMIQUE[i] = cons_bloc(0,p,1,j);
+        }
+
+        return &MEMOIRE_DYNAMIQUE[i + 1] ;
+    }
+
 
 void info_bloc(size_t i) {
     int t = taille_bloc(i);
@@ -129,9 +164,8 @@ void afficher_stat_memoire_bref(void) {
 }
 
 
-void *allocateur_malloc(size_t size) {
-    return NULL;
-}
+
+
 
 void allocateur_free(void *ptr) {
     

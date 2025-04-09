@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #ifndef ALLOCATEUR_H
 #define ALLOCATEUR_H
 

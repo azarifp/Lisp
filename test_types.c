@@ -44,7 +44,7 @@ void test_un_entier(int i) {
 void test_entiers(void) {
     int i;
     afficher_titre("Test entiers");
-    initialiser_memoire_dynamique(void);
+    initialiser_memoire_dynamique();
 
     for (i=-5 ; i<= 5; i++) {
 	test_un_entier(i);

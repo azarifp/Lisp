@@ -9,17 +9,17 @@ int main(void) {
     /* Pour tester les fonctions de la première séance */
     test_memoire_vide();
     test_allocateurs_fonctions_de_base();
-    /* test_allocateur_malloc(void); */
+    test_allocateur_malloc();
 
 
     /* Pour tester les fonctions de la seconde séance */
-    /* test_entiers(void); */
-    /* test_chaines(void); */
-    /* test_symboles(void); */
-    /* test_listes(void); */
-    /* test_cons(void); */
-    /* test_affichage_liste_cons(void); */
-    /* test_add(void); */
+     test_entiers(); 
+    /* test_chaines(); */
+    /* test_symboles(); */
+    /* test_listes(); */
+    /* test_cons(); */
+    /* test_affichage_liste_cons(); */
+    /* test_add(); */
 
 
     /* Pour tester */
