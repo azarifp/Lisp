@@ -21,7 +21,7 @@ void test_add(void) {
     sexpr liste;
     sexpr env;
     afficher_titre("Test Additions");
-    initialiser_memoire_dynamique(void);
+    initialiser_memoire_dynamique();
     a = new_integer(10);
     b = new_integer(5);
     liste = cons(a, cons(b, NULL));

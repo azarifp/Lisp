@@ -1,6 +1,7 @@
 /* Include the header for using it for writing my code on 32bits */
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "allocateur.h"
 
 /* I declare a variable called bloc for  Unsigned 32-bit integer */
@@ -161,19 +162,4 @@ void afficher_stat_memoire_bref(void) {
         }
     }
     printf("%.2f%%", (100.*a)/t);
-}
-
-
-
-
-
-void allocateur_free(void *ptr) {
-    
-}
-
-int ramasse_miette_poser_marque(void *ptr) {
-    return 0;
-}
-
-void ramasse_miette_liberer(void) {
 }

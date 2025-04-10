@@ -49,28 +49,28 @@ void test_allocateur(void);
 void test_entiers(void);
 
 
-/*
+
 #define TEST_TYPES_CHAINE
 void test_chaines(void);
-*/
 
-/*
+
+
 #define TEST_TYPES_SYMBOLE
 void test_symboles(void);
-*/
 
-/*
+
+
 #define TEST_TYPES_LISTE
 void test_cons(void);
 void test_listes(void);
 void test_affichage_liste_cons(void);
-*/
+
 
 /* Tous les tests précédents sur les types en une fonction*/
-/*
+
 #define TEST_TYPES
 void test_types(void);
-*/
+
 
 
 
@@ -81,7 +81,6 @@ void test_types(void);
 /*                                      */
 /****************************************/
 
-/*
+
 #define TEST_PRIMITIVES_ADD
 void test_add(void);
-*/

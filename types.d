@@ -1,1 +1,1 @@
-types.o: types.c memoire.h types.h
+types.o: types.c memoire.h types.h erreur.h

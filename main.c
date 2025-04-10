@@ -3,6 +3,7 @@
 #include "mes_tests.h"
 
 
+
 int main(void) {
 
 
@@ -14,10 +15,10 @@ int main(void) {
 
     /* Pour tester les fonctions de la seconde séance */
      test_entiers(); 
-    /* test_chaines(); */
-    /* test_symboles(); */
-    /* test_listes(); */
-    /* test_cons(); */
+    test_chaines();
+    test_symboles();
+    test_listes();
+    test_cons();
     /* test_affichage_liste_cons(); */
     /* test_add(); */
 
