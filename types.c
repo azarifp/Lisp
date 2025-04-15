@@ -86,13 +86,11 @@ sexpr new_symbol(char * c) {
 
 
 char* get_symbol(sexpr val) {
-    if(val==NULL) return NULL;
-    return val->data.STRING ;
+    return (val==NULL) ? NULL : val->data.STRING ;
 } 
 
 char* get_string(sexpr val){
-    if(val==NULL) return NULL;
-    return val->data.STRING ;
+    return (val==NULL) ? NULL : val->data.STRING ;
 }
 
 bool string_p(sexpr val){
@@ -132,29 +130,25 @@ bool cons_p(sexpr e) {
 }
 
 bool list_p(sexpr e) {
-    if(e==NULL) ERREUR_FATALE(NULL);
-   return e->type==couple;
-
+   return (e==NULL) ? NULL : e->type==couple;
 }
 
 sexpr car(sexpr e) {
-    if (e->type == couple) return e->data.CONS.car ;
-    else ERREUR_FATALE(NULL) ;
+    return  (e->type == couple) ?  e->data.CONS.car : ERREUR_FATALE(NULL) ;
 }
+
 sexpr cdr(sexpr e) {
-    if (e->type == couple) return e->data.CONS.cdr ;
-    else return NULL ;
+    return (e->type == couple) ? e->data.CONS.cdr : NULL ;
 }
+
 sexpr set_car(sexpr e, sexpr nouvelle) {
-    if (e->type == couple) e->data.CONS.car = nouvelle ;
-    else return NULL ;
-    return nouvelle;
+    (e->type == couple) ? return e->data.CONS.car = nouvelle : return NULL ;
 }
 
 sexpr set_cdr(sexpr e, sexpr nouvelle) {
-    if (e->type == couple) e->data.CONS.cdr = nouvelle ;
-    else return NULL ;
-    return nouvelle;
+ 
+ (e->type == couple) ? return e->data.CONS.cdr = nouvelle : return NULL ;
+ 
 }
 
 void afficher_liste(sexpr e) {
@@ -233,11 +227,7 @@ bool spec_p (sexpr val) {
 }
 
 sexpr run_prim(sexpr p, sexpr liste, sexpr env) {
-    if(prim_p(p)) {
-        return p->data.PRIMITIVE(liste, env);
-    }
-    else return NULL;
-
+    prim_p(p) ? return p->data.PRIMITIVE(liste, env) : return NULL;
 }
 
 
