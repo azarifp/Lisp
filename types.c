@@ -130,11 +130,16 @@ bool cons_p(sexpr e) {
 }
 
 bool list_p(sexpr e) {
-   return (e==NULL) ? NULL : e->type==couple;
+    if (e == NULL) return 1 ;
+    if (cons_p(e)) {
+        return list_p(cdr(e)) ;
+    }
+    return 0;
 }
 
 sexpr car(sexpr e) {
-    return  (e->type == couple) ?  e->data.CONS.car : ERREUR_FATALE(NULL) ;
+    if (e==NULL) ERREUR_FATALE(NULL) ;
+    return e->data.CONS.car ;
 }
 
 sexpr cdr(sexpr e) {
@@ -142,19 +147,22 @@ sexpr cdr(sexpr e) {
 }
 
 sexpr set_car(sexpr e, sexpr nouvelle) {
-    (e->type == couple) ? return e->data.CONS.car = nouvelle : return NULL ;
+    if (e->type == couple) return e->data.CONS.car = nouvelle ; 
+    return NULL ;
 }
 
 sexpr set_cdr(sexpr e, sexpr nouvelle) {
  
- (e->type == couple) ? return e->data.CONS.cdr = nouvelle : return NULL ;
+ if (e->type == couple) return e->data.CONS.cdr = nouvelle ; 
+ return NULL ;
  
 }
+
+
 
 void afficher_liste(sexpr e) {
     sexpr x = car(e);
     sexpr y = cdr(e);
-    printf("(");
     afficher(x);
     if(y==NULL) return ;
     if(cons_p(y)){
@@ -169,37 +177,6 @@ void afficher_liste(sexpr e) {
 }
 
 
-
-
-
-void afficher(sexpr val) {
-
-    if(val == NULL ) {
-        printf("nil");
-        return;
-    }
-    switch (val->type) {
-        case entier:
-        printf("%d",get_integer(val));
-        break;
-        case chaine:
-        printf("\"%s\"",get_string(val));
-        break;
-        case symbole:
-        break;
-        printf("%s",get_symbol(val));
-        break;
-        case couple:
-        printf("COUPLE");
-        break;
-        case prim:
-        printf("PRIM");
-        case spec:
-        printf("SPEC");
-
-    }
-
-}
 
 
 
@@ -227,8 +204,45 @@ bool spec_p (sexpr val) {
 }
 
 sexpr run_prim(sexpr p, sexpr liste, sexpr env) {
-    prim_p(p) ? return p->data.PRIMITIVE(liste, env) : return NULL;
-}
+    if (prim_p(p)) {
+        return p->data.PRIMITIVE(liste, env) ; } 
+        else {
+            return NULL ;
+        }
+    }
+    
 
+
+    void afficher(sexpr val) {
+
+        if(val == NULL ) {
+            printf("nil");
+            return;
+        }
+        switch (val->type) {
+            case entier:
+            printf("%d",get_integer(val));
+            break;
+            case chaine:
+            printf("\"%s\"",get_string(val));
+            break;
+            case symbole:
+            break;
+            printf("%s",get_symbol(val));
+            break;
+            case couple:
+            printf("(");
+            afficher_liste(val);
+            printf(")");
+            break;
+            case prim:
+            printf("#<primitive>");
+            case spec:
+            printf("SPEC");
+    
+        }
+    
+    }
+    
 
 

@@ -212,7 +212,7 @@ void test_taille_bloc(void) {
 
 
 void test_allocateurs_fonctions_de_base(void) {
-    afficher_titre("Test allocateurs fonctions de bases");
+    ("Test allocateurs fonctions de bases");
     test_cons_bloc();
     test_bloc_suivant();
     test_bloc_precedant();

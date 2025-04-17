@@ -2,6 +2,7 @@
 #include "types.h"
 #include "stdlib.h"
 #include "couleurs.h"
+#include "erreur.h"
 
 /**********************/
 /*                    */
@@ -9,29 +10,61 @@
 /*                    */
 /**********************/
 
-/* Pour s’arrêter lorsque le développeur tombe sur cas qui ne devrait
-   jamais arriver. Normalement, si le programme est écrit sans bugs,
-   les erreurs fatales ne devrait jamais être rencontrées. */
+sexpr SEXPR_ERREUR ;
+char* FONCTION_ERREUR ;
+char* MESSAGE_ERREUR ;
+enum erreurs TYPE_ERREUR ;
 
-enum erreurs {
-    TYPAGE,
-    ARITE,
-    NOM,
-    MEMOIRE,
-    DIVISION_PAR_ZERO,
-    SYNTAXE,
-    MEMOIRE_PARSEUR,
-    RUNTIME
-};
 
-typedef sexpr SEXPR_ERREUR ;
-typedef char* FONCTION_ERREUR ;
-typedef char* MESSAGE_ERREUR ;
-typedef enum erreurs TYPE_ERREUR ;
+
 
 void afficher_erreur(void) {
-    printf("Erreur d'exécution",couleur_rouge);
+    printf("%s", couleur_rouge);
+    printf("Erreur d'exécution ");
+    switch (TYPE_ERREUR) {
+        case TYPAGE:
+            printf("[TYPAGE]");
+            break;
+        case ARITE:
+            printf("[ARITE]");
+            break;
+        case NOM:
+            printf("[Nom]");
+            break;
+        case MEMOIRE:
+            printf("[MEMOIRE]");
+            break;
+        case DIVISION_PAR_ZERO:
+            printf("[DIVISION_PAR_ZERO]");
+            break;
+        case SYNTAXE:
+            printf("[SYNTAXE]");
+            break;
+        case MEMOIRE_PARSEUR:
+            printf("[MEMOIRE_PARSEUR]");
+            break;
+        case RUNTIME:
+            printf("[RUNTIME]");
+            break;
+    }
+    printf(" : %s\n", MESSAGE_ERREUR);
+    printf("Fonction fautive : << %s >>\n", FONCTION_ERREUR);
+    printf("valeur fautive : << %s >>\n", get_string(SEXPR_ERREUR));
+
 }
+
+void erreur(enum erreurs type, char* fonction, char* message, sexpr s) {
+    TYPE_ERREUR = type;
+    FONCTION_ERREUR = fonction;
+    MESSAGE_ERREUR = message;
+    SEXPR_ERREUR = s;
+    afficher_erreur();
+    exit(1);
+}
+
+
+
+
 
 void erreur_fatale(char  *fichier, int ligne, char* causes) {
     fprintf(stderr,"%s", couleur_rouge);
