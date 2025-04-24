@@ -20,3 +20,23 @@ sexpr add_valisp(sexpr liste, sexpr val) {
     return new_integer(sum);
 }
 
+sexpr defvar_valisp(sexpr liste, sexpr env) {
+    sexpr nom;
+    sexpr exp;
+    sexpr res;
+    test_nb_parametres(liste,"defvar",2);
+    nom = car(liste);
+    exp = car(cdr(liste));
+    if (!symbol_p(nom)) {
+    erreur(TYPAGE,"defvar",
+    "Le 1er paramètre doit être un symbole",
+    nom);
+    }
+    res = eval(exp, env); /* Il faut évaluer à la main le */
+    definir_variable_globale(nom,res); /* second paramètre */
+    return res;
+    }
+
+sexpr setq_valisp(sexpr lis) {
+    
+}
