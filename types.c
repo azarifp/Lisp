@@ -138,24 +138,24 @@ bool list_p(sexpr e) {
 }
 
 sexpr car(sexpr e) {
-    if (e==NULL) ERREUR_FATALE(NULL) ;
+    if (e==NULL) ERREUR_FATALE("car NULL") ;
     return e->data.CONS.car ;
 }
 
 sexpr cdr(sexpr e) {
-    return (e->type == couple) ? e->data.CONS.cdr : NULL ;
+    if (e==NULL) ERREUR_FATALE("cdr NULL") ;
+    return e->data.CONS.cdr;
 }
 
 sexpr set_car(sexpr e, sexpr nouvelle) {
-    if (e->type == couple) return e->data.CONS.car = nouvelle ; 
-    return NULL ;
+    if (e->type != couple) ERREUR_FATALE("set_car non cons") ; 
+    return e->data.CONS.car = nouvelle ;
 }
 
 sexpr set_cdr(sexpr e, sexpr nouvelle) {
- 
- if (e->type == couple) return e->data.CONS.cdr = nouvelle ; 
- return NULL ;
- 
+    if (e->type != couple) ERREUR_FATALE("set_cdr non cons");
+   return e->data.CONS.cdr = nouvelle ; 
+  
 }
 
 
@@ -211,6 +211,14 @@ sexpr run_prim(sexpr p, sexpr liste, sexpr env) {
         }
     }
     
+bool sexpr_equal(sexpr e1, sexpr e2) {
+            return (e1->type == e2->type) && 
+            ((e1->type == couple && e1->data.CONS.car == e2->data.CONS.car) ||
+            (e1->type == entier && e1->data.INTEGER == e2->data.INTEGER) || 
+            (e1->type == chaine && e1->data.STRING == e2->data.STRING) ||
+            (e1->type == symbole && e1->data.STRING == e2->data.STRING) ||
+            (e1->type == prim && e1->data.PRIMITIVE == e2->data.PRIMITIVE));
+    }
 
 
     void afficher(sexpr val) {
@@ -238,7 +246,7 @@ sexpr run_prim(sexpr p, sexpr liste, sexpr env) {
             case prim:
             printf("#<primitive>");
             case spec:
-            printf("SPEC");
+            printf("#<speciale>");
     
         }
     

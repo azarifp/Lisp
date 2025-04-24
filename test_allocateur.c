@@ -212,7 +212,7 @@ void test_taille_bloc(void) {
 
 
 void test_allocateurs_fonctions_de_base(void) {
-    ("Test allocateurs fonctions de bases");
+    printf("Test allocateurs fonctions de bases");
     test_cons_bloc();
     test_bloc_suivant();
     test_bloc_precedant();
@@ -390,4 +390,25 @@ void test_allocateur(void) {
     printf("test free %s[TODO]%s\n", couleur_jaune, couleur_defaut);
 
 }
+#endif
+
+
+#ifdef TEST_RAMASSE_MIETTE_1
+extern int pointeur_vers_indice(void*);
+
+void test_pointeur_vers_indice() {
+    int b = 1;
+    int taille = (1<<15);
+    int i;
+    void *p;
+    afficher_titre("Test RM");
+    printf("pointeur_vers_indice");
+
+    for (i=0; i<taille; i++) {
+        p = &MEMOIRE_DYNAMIQUE[i+1];
+        b = RUN_TEST(i == pointeur_vers_indice(p)) && b;
+    }
+    ok_test(b);
+}
+
 #endif

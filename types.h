@@ -28,5 +28,5 @@ sexpr new_primitive(sexpr (*prim) (sexpr,sexpr)) ;
 sexpr new_special(sexpr (*p)(sexpr, sexpr));
 bool prim_p (sexpr val);
 bool spec_p (sexpr val);
-
+bool sexpr_equal(sexpr e1, sexpr e2);
 #endif

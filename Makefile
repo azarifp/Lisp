@@ -1,5 +1,5 @@
 CC = gcc
-OPTIONS = -Wall -ansi -pedantic
+OPTIONS = -g -Wall -ansi -pedantic
 EXECUTABLE = main
 # Ne pas modifier ci-dessous
 SOURCE = $(wildcard *.c)
@@ -16,3 +16,5 @@ clean:
 	rm -vf *.o *.d
 
 -include *.d
+
+

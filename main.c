@@ -14,7 +14,7 @@ int main(void) {
     test_allocateur_malloc();
 
 
-    /* Pour tester les fonctions de la seconde séance */
+   /* Pour tester les fonctions de la seconde séance */
      test_entiers(); 
     test_chaines();
     test_symboles();
@@ -22,7 +22,8 @@ int main(void) {
     test_cons();
     test_affichage_liste_cons();
     test_add();
-
+    test_manipuler_environnement();
+    test_pointeur_vers_indice();
 
     /* Pour tester */
 

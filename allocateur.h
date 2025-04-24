@@ -13,6 +13,12 @@ void afficher_stat_memoire_bref(void);
 void info_bloc(size_t i);
 void afficher_memoire(void);
 int taille_bloc(int i);
+int pointeur_vers_indice(void *ptr);
+int ramasse_miettes_lire_marque(void *ptr);
+int ramasse_miettes_poser_marque(void *ptr);
+int bloc_libre(int i);
+void ramasse_miettes_liberer(void);
+void ramasse_miette_parcourir_et_marquer(sexpr s);
 
 
 #endif

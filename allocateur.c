@@ -1,14 +1,11 @@
-/* Include the header for using it for writing my code on 32bits */
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "allocateur.h"
+#include "erreur.h"
 
-/* I declare a variable called bloc for  Unsigned 32-bit integer */
 typedef uint32_t bloc;
 
-/* So i need to code my adresse on 15bits so i consider 15 case of 32bits */
-/* That makes it 2^15 */
 #define TAILLE_MEMOIRE_DYNAMIQUE (1<<15)
 
 
@@ -163,3 +160,63 @@ void afficher_stat_memoire_bref(void) {
     }
     printf("%.2f%%", (100.*a)/t);
 }
+
+int pointeur_vers_indice(void *ptr) {
+    int i =  (bloc*) ptr - MEMOIRE_DYNAMIQUE - 1;
+    if (i < 0 || i >= TAILLE_MEMOIRE_DYNAMIQUE) {
+        ERREUR_FATALE("Indice de MEM invalide");
+    }
+    return i;
+}
+
+
+int ramasse_miettes_lire_marque(void *ptr){
+    
+    return rm_bloc(pointeur_vers_indice(ptr));
+}
+
+int ramasse_miettes_poser_marque(void *ptr) {
+    if (ramasse_miettes_lire_marque(ptr)) {
+        ERREUR_FATALE("Erreur : bloc déjà marqué");
+    }
+    else {
+        int i;
+        i=pointeur_vers_indice(ptr);
+        MEMOIRE_DYNAMIQUE[i] = cons_bloc(1, bloc_precedant(i), usage_bloc(i), bloc_suivant(i));
+        return 0;
+    }
+
+}
+
+
+int bloc_libre(int i){
+    if (i==bloc_suivant(i) || rm_bloc(i)){
+        return 0;
+    }
+    return 1;
+}
+
+
+void ramasse_miettes_liberer(void) {
+    int i,j,p;
+    i = 0;
+    
+    for(i=0 ; i != bloc_suivant(i); i=bloc_suivant(i)) {
+        
+        if (bloc_libre(i)){
+            
+            p = bloc_precedant(i);
+            for (j = i; j != bloc_libre(j); i = bloc_suivant(i)){
+                    MEMOIRE_DYNAMIQUE[i] = cons_bloc(0, p, 0, bloc_suivant(j));
+                    MEMOIRE_DYNAMIQUE[j] = cons_bloc(0, i, 1,bloc_suivant(j));
+                    i=j;
+                }
+            }
+        else{
+            MEMOIRE_DYNAMIQUE[j] = cons_bloc(0, p, 1, bloc_suivant(j));
+
+        }
+}
+}
+
+
